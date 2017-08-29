@@ -1,0 +1,169 @@
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-*
+   Toby Opferman
+   
+   Toby's System Helper Resources
+   
+   http://www.opferman.com
+   toby@opferman.com
+
+   Copyright 2004
+
+  *-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-*/
+  
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#define IDM_SAVE      100
+#define IDM_EXIT      101
+#define IDM_PROCVIEW  102
+#define IDM_ABOUT     103
+#define IDM_REFRESH   104
+#define IDM_DRIVEVIEW 105
+#define IDM_MODVIEW   106
+#define IDM_NT_STATUS 107
+#define IDM_GLE       108
+#define IDM_WINHANDLE 109
+#define IDC_ERROR     110
+#define IDM_HANDLES   111
+#define IDM_WINDOWS   112
+#define IDM_SYMBOLS   113
+#define IDM_PLUGIN    114
+#define IDM_UNLOAD    115
+#define IDM_MIDVIEW   116
+
+#define IDM_PROCVIEWF  117
+#define IDM_DRIVEVIEWF 118
+#define IDM_MODVIEWF   119
+#define IDM_HANDLESF   120
+#define IDM_MIDVIEWF   121
+#define IDM_WINDOWSF   122
+#define IDM_SYMBOLSF   123
+#define IDM_CMDVIEW    124
+#define IDM_WINMSG     125
+#define IDM_TOOLBAR    126
+
+/* Process Menu Items */
+#define IDM_PROCTERM  500
+#define IDM_PROCINFO  501
+#define IDM_PROCDEBUG 502
+#define IDM_USERDUMP  503
+
+/* Windows Menu Items */
+#define IDM_WINDESTROY     500
+#define IDM_WINSENDMESSAGE 501
+#define IDM_WINCLOSE       502
+
+TSYSHELP ICON tsyshelp.ico
+
+
+
+TSysHelpMenu MENU
+{
+   POPUP "&File"
+   {
+      MENUITEM "&File To Use", IDM_SAVE, GRAYED
+      MENUITEM "&Exit", IDM_EXIT
+   }
+   
+   POPUP "&Options"
+   {
+      MENUITEM "&Refresh View (F5)",    IDM_REFRESH
+      // MENUITEM "&Load Plugin",     IDM_PLUGIN, GRAYED
+      // MENUITEM "&Unload Plugin",   IDM_UNLOAD, GRAYED
+   }
+      
+   POPUP "&View"
+   {
+      MENUITEM "&Processes",        IDM_PROCVIEW, CHECKED
+      MENUITEM "&Command Lines",    IDM_CMDVIEW
+      MENUITEM "&Drivers",          IDM_DRIVEVIEW 
+      MENUITEM "&Modules", IDM_MODVIEW
+      MENUITEM "&Handles", IDM_HANDLES
+      MENUITEM "&Network Connections", IDM_MIDVIEW
+      MENUITEM "&Windows",      IDM_WINDOWS 
+      MENUITEM "&Symbolic Mappings",      IDM_SYMBOLS 
+   }
+   
+   POPUP "&Write To File"
+   {
+      MENUITEM "&Processes",        IDM_PROCVIEWF, GRAYED
+      MENUITEM "&Drivers",          IDM_DRIVEVIEWF, GRAYED
+      MENUITEM "&Modules", IDM_MODVIEWF, GRAYED
+      MENUITEM "&Handles", IDM_HANDLESF, GRAYED
+      MENUITEM "&Network Connections", IDM_MIDVIEWF, GRAYED
+      MENUITEM "&Windows",      IDM_WINDOWSF, GRAYED
+      MENUITEM "&Symbolic Mappings",      IDM_SYMBOLSF, GRAYED 
+   }
+   
+   POPUP "&Tools"
+   {
+       MENUITEM "&Enable Toolbar",     IDM_TOOLBAR
+   //   MENUITEM "&NT Status",         IDM_NT_STATUS, GRAYED
+   //   MENUITEM "&GetLastError",      IDM_GLE
+  //    MENUITEM "&Window Message",    IDM_WINMSG, GRAYED
+  //    MENUITEM "&Window Handle",     IDM_WINHANDLE, GRAYED
+   }   
+   
+   POPUP "&About"
+   {
+      MENUITEM "&About QuickView", IDM_ABOUT
+   }
+}
+
+
+ProcessPopup MENU
+{
+   POPUP "&Dummy"
+   {
+      MENUITEM "&Terminate Process(es)", IDM_PROCTERM 
+     // MENUITEM "&Userdump Process(es)", IDM_USERDUMP, GRAYED
+      MENUITEM "&Debug Process(es)", IDM_PROCDEBUG
+     // MENUITEM "&Display Process Information",         IDM_PROCINFO
+   }
+   
+}
+
+
+WindowPopup MENU
+{
+   POPUP "&Dummy"
+   {
+      MENUITEM "&Send Close To Window", IDM_WINCLOSE
+      MENUITEM "&Send Destroy To Window", IDM_WINDESTROY
+     // MENUITEM "&Send Window Message", IDM_WINSENDMESSAGE
+   }
+   
+}
+
+ AboutBox DIALOG 10, 10, 160, 100
+    STYLE WS_POPUP | WS_DLGFRAME
+    {
+       CTEXT "About"                   -1, 0, 5, 160, 8
+       ICON "TSYSHELP"                 -1, 73, 20, 48, 48
+       CTEXT "QuickView System Explorer v1.1a"     -1, 0, 38, 160, 8
+       CTEXT "By Toby Opferman"        -1, 0, 50, 160, 8
+       CTEXT "Copyright (c) 2004"      -1, 0, 60, 160, 8
+       
+       DEFPUSHBUTTON "OK!"                    IDOK, 64, 80, 32, 14, WS_GROUP
+    }
+
+
+  GetLastErrorBox DIALOG DISCARDABLE 10,10, 135, 60
+   STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU| WS_BORDER | WS_VISIBLE
+   CAPTION "GetLastError"
+   {
+      CTEXT "Enter an Error Number (Decimal)" -1, 0, 3, 135, 8
+      EDITTEXT IDC_ERROR, 52, 20, 35, 10
+      DEFPUSHBUTTON "OK"     IDOK,  25, 35, 30, 15, WS_GROUP
+      PUSHBUTTON "CANCEL"  IDCANCEL,  80, 35, 30, 15, WS_GROUP
+   }
+   
+  NTStatusErrorBox DIALOG DISCARDABLE 10,10, 135, 60
+   STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU| WS_BORDER | WS_VISIBLE
+   CAPTION "NT Status"
+   {
+      CTEXT "Enter an NT Status Number (HEX)" -1, 0, 3, 135, 8
+      EDITTEXT IDC_ERROR, 52, 20, 35, 10
+      DEFPUSHBUTTON "OK"     IDOK,  25, 35, 30, 15, WS_GROUP
+      PUSHBUTTON "CANCEL"  IDCANCEL,  80, 35, 30, 15, WS_GROUP
+   }

@@ -1,0 +1,5 @@
+LIBRARY "QV"
+
+EXPORTS
+	TsysDll_CreateToolbar
+	TsysDll_HandleCommands

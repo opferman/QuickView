@@ -1,0 +1,28 @@
+QuickView Protocol
+
+Here is the QV Protocol.
+
+
+_QV_PASSWORD_ {
+WORD  wFunction;   // 0000
+DWORD dwPassword;  // Numeric Password
+} ;
+
+
+_QV_ENUM_PROCESSES {
+WORD  wFunction;  // 0001
+} ;
+
+_QV_ENUM_HANDLES {
+WORD wFunction; // 0002
+} ;
+
+QV responses
+
+
+_QV_PROCESS_ {
+WORD wFunction; // 0001
+...
+}
+
+
