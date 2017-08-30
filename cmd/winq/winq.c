@@ -315,5 +315,5 @@ void WindowQuery_Initialize(void)
 {
     Init_ProcessLibrary();
     PrivLib_EnableProcessForDebug();
-}
+} 
 

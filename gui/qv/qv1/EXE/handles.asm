@@ -754,7 +754,7 @@ HandView_Hide ENDP
 ; 
 ; POP EBX
 ; MOV EAX, [dwRetValue]
-; 
+;  
 ; RET
 ;HandView_IsPipeW ENDP
 

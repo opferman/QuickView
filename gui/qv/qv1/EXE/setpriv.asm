@@ -120,6 +120,6 @@ LOCAL cbPrevious :DWORD
   @SetPriv_Exit:
    RET
 SetPriv_SetPrivilege ENDP
-
+ 
 
 

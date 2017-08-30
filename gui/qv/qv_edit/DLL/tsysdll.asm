@@ -1172,5 +1172,5 @@ TsysDll_StrHexToNum PROC pszString :DWORD
 TsysDll_StrHexToNum ENDP
 
 END TsysDll_EntryPoint
-
+ 
 
